@@ -1,47 +1,63 @@
 {
-  "intro": "A life spent moving between countries, languages, and disciplines — from military service to software to the flight line. Scroll through, or jump straight to any year.",
+  "intro": "A life spent moving between countries, languages, and disciplines \u2014 from military service to software to the flight line. Scroll through, or jump straight to any year.",
   "chapters": [
     {
       "year": "2014",
       "title": "Joining the Argentine Navy Reserve",
-      "text": "Started as a reservist in the Argentine Navy, training in hazmat/dangerous goods handling, firefighting, and combat medic skills — a foundation of procedure and discipline that still shows up in how I approach ramp safety today.",
-      "image": "assets/images/biography/2014.jpg"
+      "text": "Started as a reservist in the Argentine Navy, training in hazmat/dangerous goods handling, firefighting, and combat medic skills \u2014 a foundation of procedure and discipline that still shows up in how I approach ramp safety today.",
+      "images": [
+        "assets/images/biography/2014.jpg"
+      ]
     },
     {
       "year": "2017",
       "title": "Writing software for the first time professionally",
-      "text": "Joined Brain Knowledge Systems in Argentina as a developer, working in Python, Django, and C. This is where the engineering side of things started — a thread that later became automation scripts, side projects, and eventually freelance work.",
-      "image": "assets/images/biography/2017.jpg"
+      "text": "Joined Brain Knowledge Systems in Argentina as a developer, working in Python, Django, and C. This is where the engineering side of things started \u2014 a thread that later became automation scripts, side projects, and eventually freelance work.",
+      "images": [
+        "assets/images/biography/2017.jpg"
+      ]
     },
     {
       "year": "2019",
       "title": "HR reporting at Accenture",
-      "text": "Moved into HR report writing at Accenture Argentina, working with Workday. Less code, more data and process — but it sharpened how I think about structuring information clearly for other people to use.",
-      "image": "assets/images/biography/2019.jpg"
+      "text": "Moved into HR report writing at Accenture Argentina, working with Workday. Less code, more data and process \u2014 but it sharpened how I think about structuring information clearly for other people to use.",
+      "images": [
+        "assets/images/biography/2019.jpg"
+      ]
     },
     {
       "year": "2021",
       "title": "Moving to Japan",
-      "text": "Relocated to Sapporo, Hokkaido. New language environment, new career direction — the start of the aviation ground operations chapter.",
-      "image": "assets/images/biography/2021.jpg"
+      "text": "Relocated to Sapporo, Hokkaido. New language environment, new career direction \u2014 the start of the aviation ground operations chapter.",
+      "images": [
+        "assets/images/biography/2021.jpg"
+      ]
     },
     {
       "year": "2022",
       "title": "Ramp agent at Skymark Airlines",
-      "text": "Began working ramp and ground operations at New Chitose Airport — baggage handling, aircraft turnaround, and the procedural rhythm of airside work.",
-      "image": "assets/images/biography/2022.jpg"
+      "text": "Began working ramp and ground operations at New Chitose Airport \u2014 baggage handling, aircraft turnaround, and the procedural rhythm of airside work.",
+      "images": [
+        "assets/images/biography/2022.jpg"
+      ]
     },
     {
       "year": "2024",
       "title": "Ramp agent at FRS",
       "text": "Continued in ground operations at FRS, taking on weight and balance responsibilities alongside ramp safety work.",
-      "image": "assets/images/biography/2024.jpg"
+      "images": [
+        "assets/images/biography/2024.jpg",
+        "assets/images/biography/2024b.jpg"
+      ]
     },
     {
       "year": "2026",
       "title": "Building things on the side",
-      "text": "Shipped a METAR/TAF weather app for pilots, built with Kotlin and Jetpack Compose, and started taking on freelance Python and automation work — bringing the software side back into the picture alongside aviation.",
-      "image": "assets/images/biography/2026.jpg"
+      "text": "Shipped a METAR/TAF weather app for pilots, built with Kotlin and Jetpack Compose, and started taking on freelance Python and automation work \u2014 bringing the software side back into the picture alongside aviation.",
+      "images": [
+        "assets/images/biography/2026.jpg",
+        "assets/images/biography/2026b.jpg"
+      ]
     }
   ]
 }

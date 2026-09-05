@@ -26,11 +26,34 @@ def load_json(path: Path) -> dict:
         return json.load(f)
 
 
+def compute_fan(n: int):
+    """Return per-image {rot, x, z} resting offsets so images fan out from
+    center. No image's resting position is dead-center — only the
+    'active' class (applied via JS on click) pulls a photo to center,
+    so every photo always has a reachable, distinct resting spot to
+    click back to."""
+    fan = []
+    for i in range(n):
+        side = 1 if i % 2 == 0 else -1
+        magnitude = i // 2 + 1
+        rot = side * 6 * magnitude
+        x = side * 16 * magnitude
+        fan.append({"rot": rot, "x": x, "z": n - i})
+    return fan
+
+
 def build() -> None:
     resume_data = load_json(DATA_FILE)
     biography_data = load_json(BIOGRAPHY_FILE) if BIOGRAPHY_FILE.exists() else {}
 
+    chapters = biography_data.get("chapters", [])
+    for ch in chapters:
+        images = ch.get("images") or ([ch["image"]] if ch.get("image") else [])
+        ch["images"] = images
+        ch["fan"] = compute_fan(len(images))
+
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
+    env.globals["zip"] = zip
     OUTPUT_DIR.mkdir(exist_ok=True)
 
     # Biography homepage
@@ -38,7 +61,7 @@ def build() -> None:
     index_html = index_template.render(
         basics=resume_data.get("basics", {}),
         intro=biography_data.get("intro"),
-        chapters=biography_data.get("chapters", []),
+        chapters=chapters,
     )
     (OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
 

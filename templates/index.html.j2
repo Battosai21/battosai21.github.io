@@ -17,11 +17,12 @@
     --amber-dim: #8a662a;
     --text: #e9edf1;
     --text-muted: #8e99a4;
-    --max-width: 760px;
+    --max-width: 980px;
+    --nav-h: 52px;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 
   body {
     margin: 0;
@@ -36,15 +37,19 @@
   a { color: var(--text); }
 
   .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+  .wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
   /* Header */
-  header.masthead { padding: 56px 0 28px; }
+  header.masthead { padding: 56px 0 28px; scroll-snap-align: none; }
 
   .masthead-grid {
+    max-width: 760px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 32px;
     align-items: start;
+    padding: 0 24px;
   }
 
   .photo-frame { position: relative; width: 108px; height: 108px; flex-shrink: 0; }
@@ -79,11 +84,7 @@
   .meta-row a { text-decoration: none; border-bottom: 1px solid var(--rule); }
   .meta-row a:hover { border-color: var(--amber); color: var(--amber); }
 
-  .resume-jump {
-    color: var(--amber) !important;
-    border-color: var(--amber-dim) !important;
-    font-weight: 500;
-  }
+  .resume-jump { color: var(--amber) !important; border-color: var(--amber-dim) !important; font-weight: 500; }
 
   /* Timeline nav */
   .timeline-nav {
@@ -97,7 +98,7 @@
   }
 
   .timeline-track {
-    max-width: var(--max-width);
+    max-width: 760px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -121,50 +122,93 @@
   }
 
   .timeline-track button:hover { color: var(--text); }
-
-  .timeline-track button.active {
-    color: var(--amber);
-    border-bottom-color: var(--amber);
-  }
+  .timeline-track button.active { color: var(--amber); border-bottom-color: var(--amber); }
 
   /* Intro */
-  .intro { padding: 40px 0 8px; }
+  .intro { padding: 40px 0 8px; scroll-snap-align: none; }
   .intro p { font-size: 1.08rem; color: var(--text-muted); max-width: 58ch; }
 
-  /* Chapters */
+  /* Chapters — one per screen, alternating sides */
   .chapter {
-    padding: 56px 0;
+    min-height: calc(100dvh - var(--nav-h));
+    display: flex;
+    align-items: center;
     border-bottom: 1px dashed var(--rule);
-    display: grid;
-    grid-template-columns: 88px 1fr;
-    gap: 24px;
+    scroll-snap-align: start;
+    scroll-margin-top: var(--nav-h);
+    padding: 48px 0;
   }
   .chapter:last-of-type { border-bottom: none; }
+
+  .chapter-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 56px;
+  }
+
+  /* Alternate sides on even chapters */
+  .chapter:nth-of-type(even) .chapter-inner { flex-direction: row-reverse; }
+
+  .chapter-text { flex: 1 1 0; min-width: 0; }
+  .chapter-media { flex: 1 1 0; min-width: 0; }
 
   .chapter-year {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: var(--amber);
-    padding-top: 2px;
+    margin-bottom: 8px;
   }
 
   .chapter-title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 1.3rem;
-    margin: 0 0 12px;
+    font-size: 1.4rem;
+    margin: 0 0 14px;
   }
 
-  .chapter-text { color: var(--text-muted); font-size: 1rem; max-width: 58ch; margin: 0 0 20px; }
+  .chapter-body { color: var(--text-muted); font-size: 1.02rem; max-width: 50ch; }
 
-  .chapter-image {
+  /* Photo fan */
+  .photo-fan {
+    position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border: 1px solid var(--rule);
+    aspect-ratio: 16 / 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .chapter-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .fan-photo {
+    position: absolute;
+    width: 72%;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease, box-shadow 0.4s ease;
+    transform: rotate(var(--fan-rot, 0deg)) translateX(var(--fan-x, 0px));
+    z-index: var(--fan-z, 1);
+  }
+
+  .fan-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(55%); transition: filter 0.4s ease; }
+
+  .fan-photo:hover { filter: none; }
+  .fan-photo:hover img { filter: grayscale(20%); }
+
+  .fan-photo.active {
+    transform: rotate(0deg) translateX(0);
+    z-index: 10;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+    cursor: default;
+  }
+  .fan-photo.active img { filter: none; }
+
+  .fan-photo:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
 
   /* Scroll reveal */
   .reveal {
@@ -176,21 +220,31 @@
 
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
+    html { scroll-behavior: auto; scroll-snap-type: none; }
+    .fan-photo { transition: filter 0.3s ease; }
   }
 
   footer {
-    padding: 40px 0 60px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     color: var(--text-muted);
+    scroll-snap-align: none;
   }
-
   footer a { color: var(--amber); text-decoration: none; }
 
-  @media (max-width: 560px) {
-    .chapter { grid-template-columns: 1fr; gap: 8px; }
-    .chapter-year { font-size: 1.2rem; }
+  @media (max-width: 760px) {
+    .chapter { min-height: 0; padding: 40px 0; }
+    .chapter-inner,
+    .chapter:nth-of-type(even) .chapter-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+    .chapter-media { order: -1; }
+    .fan-photo { width: 82%; }
     header.masthead { padding-top: 36px; }
   }
 
@@ -199,25 +253,23 @@
 </head>
 <body>
 
-<div class="wrap">
-  <header class="masthead">
-    <div class="masthead-grid">
-      <div>
-        <div class="callsign">{{ basics.location.city }}, {{ basics.location.country }}</div>
-        <h1 class="name">{{ basics.name }}</h1>
-        <p class="role">{{ basics.label }}</p>
-        <div class="meta-row">
-          <a href="resume.html" class="resume-jump">Jump to résumé →</a>
-          {% if basics.email %}<a href="mailto:{{ basics.email }}">{{ basics.email }}</a>{% endif %}
-          {% for p in basics.profiles %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.network }}</a>{% endfor %}
-        </div>
+<header class="masthead">
+  <div class="masthead-grid">
+    <div>
+      <div class="callsign">{{ basics.location.city }}, {{ basics.location.country }}</div>
+      <h1 class="name">{{ basics.name }}</h1>
+      <p class="role">{{ basics.label }}</p>
+      <div class="meta-row">
+        <a href="resume.html" class="resume-jump">Jump to résumé →</a>
+        {% if basics.email %}<a href="mailto:{{ basics.email }}">{{ basics.email }}</a>{% endif %}
+        {% for p in basics.profiles %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.network }}</a>{% endfor %}
       </div>
-      {% if basics.image %}
-      <div class="photo-frame"><img src="{{ basics.image }}" alt="{{ basics.name }}"></div>
-      {% endif %}
     </div>
-  </header>
-</div>
+    {% if basics.image %}
+    <div class="photo-frame"><img src="{{ basics.image }}" alt="{{ basics.name }}"></div>
+    {% endif %}
+  </div>
+</header>
 
 <nav class="timeline-nav">
   <div class="timeline-track">
@@ -227,67 +279,64 @@
   </div>
 </nav>
 
-<div class="wrap">
-  {% if intro %}
-  <section class="intro reveal">
-    <p>{{ intro }}</p>
-  </section>
-  {% endif %}
+{% if intro %}
+<section class="intro reveal wrap-narrow">
+  <p>{{ intro }}</p>
+</section>
+{% endif %}
 
-  <main>
-    {% for ch in chapters %}
-    <section class="chapter reveal" id="year-{{ ch.year }}" data-year="year-{{ ch.year }}">
-      <div class="chapter-year">{{ ch.year }}</div>
-      <div>
-        <h2 class="chapter-title">{{ ch.title }}</h2>
-        <p class="chapter-text">{{ ch.text }}</p>
-        {% if ch.image %}
-        <div class="chapter-image"><img src="{{ ch.image }}" alt="{{ ch.title }}" loading="lazy"></div>
+<main>
+  {% for ch in chapters %}
+  <section class="chapter reveal" id="year-{{ ch.year }}" data-year="year-{{ ch.year }}">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">{{ ch.year }}</div>
+          <h2 class="chapter-title">{{ ch.title }}</h2>
+          <p class="chapter-body">{{ ch.text }}</p>
+        </div>
+        {% if ch.images %}
+        <div class="chapter-media">
+          <div class="photo-fan">
+            {% for img, f in zip(ch.images, ch.fan) %}
+            <button
+              class="fan-photo{% if loop.first %} active{% endif %}"
+              style="--fan-rot: {{ f.rot }}deg; --fan-x: {{ f.x }}px; --fan-z: {{ f.z }};"
+              aria-label="View photo {{ loop.index }} of {{ ch.images|length }} for {{ ch.year }}"
+              {% if ch.images|length == 1 %}tabindex="-1"{% endif %}
+            >
+              <img src="{{ img }}" alt="{{ ch.title }} — photo {{ loop.index }}" loading="lazy">
+            </button>
+            {% endfor %}
+          </div>
+        </div>
         {% endif %}
       </div>
-    </section>
-    {% endfor %}
-  </main>
+    </div>
+  </section>
+  {% endfor %}
+</main>
 
-  <footer>
-    Prefer the short version? <a href="resume.html">View my résumé →</a>
-  </footer>
-</div>
+<footer>
+  Prefer the short version? <a href="resume.html">View my résumé →</a>
+</footer>
 
 <script>
 (function () {
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var chapters = document.querySelectorAll('.chapter');
+  var navEl = document.querySelector('.timeline-nav');
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
   var revealEls = document.querySelectorAll('.reveal');
   var navButtons = document.querySelectorAll('.timeline-track button');
   var track = document.querySelector('.timeline-track');
 
-  // Click-to-jump
-  navButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var target = document.getElementById(btn.dataset.target);
-      if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-    });
-  });
-
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-    if (chapters.length) setActiveNav(chapters[0].dataset.year);
-    return;
+  function setNavHeight() {
+    if (navEl) document.documentElement.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
   }
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight);
 
-  // Fade-in reveal
-  var revealObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(function (el) { revealObserver.observe(el); });
-
-  // Active year tracking
+  // Active year highlight
   function setActiveNav(id) {
     navButtons.forEach(function (btn) {
       var isActive = btn.dataset.target === id;
@@ -300,12 +349,96 @@
     });
   }
 
-  var chapterObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) setActiveNav(entry.target.dataset.year);
+  // Click-to-jump on timeline
+  var isProgrammaticScroll = false;
+
+  function waitForScrollSettle(cb) {
+    var lastY = window.scrollY;
+    var stableFrames = 0;
+    function check() {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 1) {
+        stableFrames++;
+      } else {
+        stableFrames = 0;
+      }
+      lastY = y;
+      if (stableFrames > 6) { cb(); return; }
+      requestAnimationFrame(check);
+    }
+    requestAnimationFrame(check);
+  }
+
+  navButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      isProgrammaticScroll = true;
+      setActiveNav(btn.dataset.target);
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      waitForScrollSettle(function () { isProgrammaticScroll = false; });
     });
-  }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
-  chapters.forEach(function (el) { chapterObserver.observe(el); });
+  });
+
+  // Fan photo picker
+  document.querySelectorAll('.photo-fan').forEach(function (fan) {
+    var photos = fan.querySelectorAll('.fan-photo');
+    if (photos.length <= 1) return;
+    photos.forEach(function (photo) {
+      photo.addEventListener('click', function () {
+        photos.forEach(function (p) { p.classList.remove('active'); p.tabIndex = 0; });
+        photo.classList.add('active');
+      });
+    });
+  });
+
+  // Active-year tracking: checks actual chapter positions on every scroll
+  // frame instead of relying on intersection-threshold events, so a fast
+  // scroll can never skip over a chapter without it being detected.
+  var scrollTicking = false;
+
+  function updateActiveFromScroll() {
+    if (isProgrammaticScroll || !chapters.length) return;
+    var navH = navEl ? navEl.offsetHeight : 0;
+    var refY = navH + 4;
+    var current = chapters[0];
+    for (var i = 0; i < chapters.length; i++) {
+      if (chapters[i].getBoundingClientRect().top <= refY) {
+        current = chapters[i];
+      } else {
+        break;
+      }
+    }
+    setActiveNav(current.dataset.year);
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(function () {
+        updateActiveFromScroll();
+        scrollTicking = false;
+      });
+    }
+  }, { passive: true });
+
+  updateActiveFromScroll();
+
+  // Fade-in reveal
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
 })();
 </script>
 
