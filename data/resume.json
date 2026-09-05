@@ -1,0 +1,100 @@
+{
+  "basics": {
+    "name": "Manuel Escarrá Ghiglione",
+    "label": "Programmer Analyst | Aviation Ground Operations Specialist",
+    "image": "assets/images/profile.jpg",
+    "email": "escarra.manuel@gmail.com",
+    "location": {
+      "city": "Sapporo",
+      "region": "Hokkaido",
+      "country": "Japan"
+    },
+    "profiles": [
+      { "network": "GitHub", "username": "Battosai21", "url": "https://github.com/Battosai21" },
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/manuel-escarr%C3%A1-ghiglione-50b406126/" }
+    ],
+    "summary": "Programmer Analyst, Reservist Navy NCO, Firefighter, Ramp agent and aviation ground operations specialist. Trilingual (Spanish/English/Japanese)."
+  },
+  "work": [
+    {
+      "company": "FRS",
+      "position": "Ramp Agent",
+      "location": "New Chitose Airport, Japan",
+      "startDate": "2024-01",
+      "endDate": "2026-01",
+      "summary": "Ground operations including baggage handling, weight and balance, and ramp safety procedures.",
+      "highlights": []
+    },
+    {
+      "company": "Skymark Airlines",
+      "position": "Ramp Agent",
+      "location": "New Chitose Airport, Japan",
+      "startDate": "",
+      "endDate": "",
+      "summary": "Ramp and ground operations for domestic carrier.",
+      "highlights": []
+    },
+    {
+      "company": "Brain Knowledge Systems",
+      "position": "Software Developer",
+      "location": "Argentina",
+      "startDate": "",
+      "endDate": "",
+      "summary": "Development work using Python/Django, C, and Bash.",
+      "highlights": []
+    },
+    {
+      "company": "Accenture",
+      "position": "HR Report Writer",
+      "location": "Argentina",
+      "startDate": "",
+      "endDate": "",
+      "summary": "HR reporting and analysis using Workday.",
+      "highlights": []
+    }
+  ],
+  "military": [
+    {
+      "organization": "Argentine Navy (Reserve)",
+      "position": "Reservist",
+      "highlights": [
+        "Hazmat / Dangerous Goods Regulations (DGR) certification",
+        "Firefighting certification",
+        "Combat medic training"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "METAR/TAF Weather App",
+      "description": "Android app for pilots and aviation enthusiasts to check METAR/TAF weather reports. Built with Kotlin, Jetpack Compose, Retrofit, and DataStore Preferences.",
+      "url": "https://play.google.com/store/apps/details?id=your.app.id",
+      "image": "assets/images/projects/metar-taf.jpg",
+      "keywords": ["Kotlin", "Jetpack Compose", "Android", "Aviation"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Aviation Ground Operations",
+      "keywords": ["Ramp/Baggage Handling", "Weight & Balance", "DGR/Hazmat", "Ramp Safety"]
+    },
+    {
+      "name": "Software Development",
+      "keywords": ["Python", "Django", "C", "Kotlin", "Bash"]
+    },
+    {
+      "name": "Tools & Platforms",
+      "keywords": ["Workday", "Retrofit", "Jetpack Compose", "Git", "GitHub Actions"]
+    }
+  ],
+  "languages": [
+    { "language": "Spanish", "fluency": "Native" },
+    { "language": "English", "fluency": "Fluent" },
+    { "language": "Japanese", "fluency": "Fluent" }
+  ],
+  "certifications": [
+    { "name": "Dangerous Goods Regulations (DGR) / Hazmat", "issuer": "Argentine Navy" },
+    { "name": "Firefighting Certification", "issuer": "Argentine Navy" },
+    { "name": "Combat Medic Training", "issuer": "Argentine Navy" }
+  ]
+}
