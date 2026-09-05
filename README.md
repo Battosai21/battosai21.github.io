@@ -6,16 +6,23 @@ auto-deployed to GitHub Pages on every push.
 ## How it works
 
 ```
-data/resume.json        ← your info lives here (edit this)
-templates/index.html.j2 ← Jinja2 template (rarely needs editing)
-build.py                ← reads the data, renders the template
-output/index.html       ← generated site (don't edit directly)
+data/resume.json        ← CV data (work, skills, projects, etc.)
+data/biography.json     ← homepage story: intro + year-by-year chapters
+templates/index.html.j2 ← biography homepage (scrollable story + timeline)
+templates/resume.html.j2← résumé page
+build.py                ← reads both data files, renders both templates
+output/                 ← generated site: index.html, resume.html, assets/
 .github/workflows/deploy.yml ← builds + deploys automatically on push
 ```
 
-You edit `data/resume.json`, push to `main`, and GitHub Actions rebuilds
-the site and publishes it to GitHub Pages automatically. No manual
-deploy step.
+The homepage (`index.html`) is a scrollable biography with a sticky
+year-timeline at the top — clicking a year jumps to that chapter, and
+the active year highlights as you scroll. A "Jump to résumé →" link in
+the header (and footer) takes visitors straight to `resume.html`,
+which has its own "← Back to my story" link.
+
+You edit the two JSON files, push to `main`, and GitHub Actions
+rebuilds both pages and republishes them automatically.
 
 ## One-time setup
 
@@ -39,8 +46,14 @@ python build.py
 
 ## Updating your info
 
-Edit `data/resume.json` — it follows a structure loosely based on the
-[JSON Resume](https://jsonresume.org/) schema:
+**The biography (`data/biography.json`)** — an `intro` string plus a
+`chapters` array. Each chapter needs a `year`, `title`, `text`, and
+optional `image` path. Add, remove, or reorder chapters freely — the
+timeline and page both rebuild from whatever's in the array. Years
+don't need to be evenly spaced or continuous.
+
+**The résumé (`data/resume.json`)** — follows a structure loosely based
+on the [JSON Resume](https://jsonresume.org/) schema:
 
 - `basics` — name, title, contact info, profile links, summary
 - `work` — job history
@@ -61,6 +74,17 @@ data is empty.
 Colors, fonts, and spacing are all defined as CSS in the `<style>`
 block at the top of `templates/index.html.j2`. The key variables are
 at the top under `:root` if you want to change the palette quickly.
+
+## Adding photos
+
+Drop images into `assets/images/` (there's a `biography/` subfolder
+for chapter photos and a `projects/` subfolder for project photos) and
+reference them by path in the matching JSON file. `build.py` copies
+the whole `assets/` folder into `output/` on every build, so new
+images just work once referenced — no other wiring needed.
+Recommended aspect ratios: square for the profile photo, 16:10 for
+chapter and project photos, so nothing gets stretched or cropped
+oddly.
 
 ## Ideas for making it more "dynamic"
 
