@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manuel Escarra Ghiglione — Aviation Ground Operations Specialist | Python Developer</title>
-<meta name="description" content="Ramp agent and aviation ground operations specialist with a background in software development and HR reporting. Trilingual (Spanish/English/Japanese). Combines hands-on, procedural aviation experience with practical programming skills for automation and tooling.">
+<title>Manuel Escarrá Ghiglione — Father, son, husband, friend
+Programmer Analyst
+Aviation Ground Operations Specialist</title>
+<meta name="description" content="Systems analyst/developer with a background in aviation ground operations. Trilingual (Spanish/English/Japanese). Combines hands-on, procedural aviation experience with practical programming skills for automation and tooling.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -17,100 +19,65 @@
     --amber-dim: #8a662a;
     --text: #e9edf1;
     --text-muted: #8e99a4;
-    --max-width: 760px;
+    --max-width: 980px;
+    --nav-h: 52px;
   }
 
   * { box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    line-height: 1.55;
+    line-height: 1.6;
     font-size: 16px;
   }
 
   ::selection { background: var(--amber); color: #10161d; }
-
   a { color: var(--text); }
 
-  .wrap {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+  .wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
-  /* Header / masthead */
-  header.masthead {
-    border-bottom: 1px solid var(--rule);
-    padding: 64px 0 28px;
-  }
+  /* Header */
+  header.masthead { padding: 56px 0 28px; scroll-snap-align: none; }
 
   .masthead-grid {
+    max-width: 760px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 32px;
     align-items: start;
+    padding: 0 24px;
   }
 
-  .photo-frame {
-    position: relative;
-    width: 128px;
-    height: 128px;
-    flex-shrink: 0;
-  }
-
-  .photo-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(35%);
-  }
-
-  .photo-frame::before,
-  .photo-frame::after {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--amber);
-  }
-
+  .photo-frame { position: relative; width: 108px; height: 108px; flex-shrink: 0; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(35%); }
+  .photo-frame::before, .photo-frame::after { content: ""; position: absolute; width: 16px; height: 16px; border: 2px solid var(--amber); }
   .photo-frame::before { top: -6px; left: -6px; border-right: none; border-bottom: none; }
   .photo-frame::after { bottom: -6px; right: -6px; border-left: none; border-top: none; }
 
-  .callsign {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--amber);
-    letter-spacing: 0.02em;
-    margin-bottom: 14px;
-  }
+  .callsign { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--amber); margin-bottom: 14px; }
 
   h1.name {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: clamp(2.1rem, 5vw, 3.1rem);
+    font-size: clamp(2rem, 5vw, 2.8rem);
     line-height: 1.08;
     margin: 0 0 10px;
     letter-spacing: -0.01em;
   }
 
-  .role {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    max-width: 46ch;
-  }
+  .role { font-size: 1.02rem; color: var(--text-muted); max-width: 46ch; white-space: pre-line; }
 
   .meta-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 18px;
-    margin-top: 22px;
+    margin-top: 20px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12.5px;
     color: var(--text-muted);
@@ -119,442 +86,582 @@
   .meta-row a { text-decoration: none; border-bottom: 1px solid var(--rule); }
   .meta-row a:hover { border-color: var(--amber); color: var(--amber); }
 
-  /* Sections */
-  section { padding: 46px 0; border-bottom: 1px solid var(--rule); }
-  section:last-of-type { border-bottom: none; }
+  .resume-jump { color: var(--amber) !important; border-color: var(--amber-dim) !important; font-weight: 500; }
 
-  .section-head {
-    display: grid;
-    grid-template-columns: 92px 1fr;
-    gap: 20px;
-    align-items: baseline;
-    margin-bottom: 26px;
+  /* Timeline nav */
+  .timeline-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(16, 22, 29, 0.92);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
 
-  .section-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--amber-dim);
-  }
-
-  .section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    margin: 0;
-  }
-
-  .summary-text {
-    max-width: 62ch;
-    color: var(--text);
-    font-size: 1.02rem;
-  }
-
-  /* Log entries (work / military) */
-  .log {
-    display: grid;
-    grid-template-columns: 92px 1fr;
-    gap: 20px;
-    padding: 16px 0;
-  }
-
-  .log + .log { border-top: 1px dashed var(--rule); }
-
-  .log-dates {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    padding-top: 3px;
-  }
-
-  .log-role {
-    font-weight: 500;
-    font-size: 1.05rem;
-    margin: 0 0 2px;
-  }
-
-  .log-org {
-    color: var(--amber);
-    font-size: 0.92rem;
-    margin: 0 0 8px;
-  }
-
-  .log-summary { color: var(--text-muted); font-size: 0.95rem; max-width: 56ch; }
-
-  .log ul {
-    margin: 8px 0 0;
-    padding-left: 18px;
-    color: var(--text-muted);
-    font-size: 0.92rem;
-  }
-
-  /* Projects */
-  .project {
-    display: grid;
-    grid-template-columns: 92px 1fr;
-    gap: 20px;
-    padding: 16px 0;
-  }
-  .project + .project { border-top: 1px dashed var(--rule); }
-
-  .project-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    padding-top: 3px;
-  }
-
-  .project-name { font-weight: 500; font-size: 1.05rem; margin: 0 0 6px; }
-  .project-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 56ch; }
-
-  .keywords {
+  .timeline-track {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .timeline-track::-webkit-scrollbar { display: none; }
 
-  .keywords span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
-    color: var(--amber);
-    border: 1px solid var(--amber-dim);
-    padding: 2px 8px;
-    border-radius: 3px;
-  }
-
-  .project-name a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--rule); }
-  .project-name a:hover { border-color: var(--amber); color: var(--amber); }
-
-  /* Skills grid */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 26px 40px;
-  }
-
-  .skill-group-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
+  .timeline-track button {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
     color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .timeline-track button:hover { color: var(--text); }
+  .timeline-track button.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* Intro */
+  .intro {
+    padding: 40px 20px 44px;
+    margin-bottom: 8px;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+    scroll-snap-align: none;
+  }
+  .intro p {
+    font-size: 1.08rem;
+    color: var(--text-muted);
+    max-width: 58ch;
+    text-align: justify;
+    text-justify: inter-word;
+    white-space: pre-line;
+  }
+
+  /* Chapters — one per screen, alternating sides */
+  .chapter {
+    min-height: calc(100dvh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dashed var(--rule);
+    scroll-snap-align: start;
+    scroll-margin-top: var(--nav-h);
+    padding: 48px 0;
+  }
+  .chapter:last-of-type { border-bottom: none; }
+
+  .chapter-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 56px;
+  }
+
+  /* Alternate sides on even chapters */
+  .chapter:nth-of-type(even) .chapter-inner { flex-direction: row-reverse; }
+
+  .chapter-text { flex: 1 1 0; min-width: 0; }
+  .chapter-media { flex: 1 1 0; min-width: 0; }
+
+  .chapter-year {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--amber);
     margin-bottom: 8px;
   }
 
-  .skill-group-items {
-    font-size: 0.98rem;
-    line-height: 1.7;
+  .chapter-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 0 0 14px;
   }
 
-  /* Languages + certs, side by side */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
+  .chapter-body { color: var(--text-muted); font-size: 1.02rem; max-width: 50ch; }
 
-  .list-plain { list-style: none; padding: 0; margin: 0; }
-  .list-plain li {
+  /* Photo fan */
+  .photo-fan {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
     display: flex;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-top: 1px dashed var(--rule);
-    font-size: 0.95rem;
-  }
-  .list-plain li:first-child { border-top: none; }
-  .list-plain .fluency,
-  .list-plain .issuer { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
-
-  footer {
-    padding: 40px 0 60px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
+    align-items: center;
+    justify-content: center;
   }
 
-  @media (max-width: 560px) {
-    .section-head, .log, .project { grid-template-columns: 1fr; gap: 6px; }
-    .two-col, .skills-grid { grid-template-columns: 1fr; }
-    header.masthead { padding-top: 40px; }
+  .fan-photo {
+    position: absolute;
+    width: 72%;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease, box-shadow 0.4s ease;
+    transform: rotate(var(--fan-rot, 0deg)) translateX(var(--fan-x, 0px));
+    z-index: var(--fan-z, 1);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
+  .fan-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(55%); transition: filter 0.4s ease; }
 
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--amber);
-    outline-offset: 2px;
+  .fan-photo:hover { filter: none; }
+  .fan-photo:hover img { filter: grayscale(20%); }
+
+  .fan-photo.active {
+    transform: rotate(0deg) translateX(0);
+    z-index: 10;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+    cursor: default;
   }
+  .fan-photo.active img { filter: none; }
+
+  .fan-photo:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
 
   /* Scroll reveal */
   .reveal {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
     transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal.is-visible {
-      opacity: 1;
-      transform: none;
-      transition: none;
+    .reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; scroll-snap-type: none; }
+    .fan-photo { transition: filter 0.3s ease; }
+  }
+
+  footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    scroll-snap-align: none;
+  }
+  footer a { color: var(--amber); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .chapter { min-height: 0; padding: 40px 0; }
+    .chapter-inner,
+    .chapter:nth-of-type(even) .chapter-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
     }
+    .chapter-media { order: -1; }
+    .fan-photo { width: 82%; }
+    header.masthead { padding-top: 36px; }
   }
 
-  /* Project image */
-  .project-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    margin-top: 12px;
-    border: 1px solid var(--rule);
-  }
-
-  .project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(55%);
-    transform: scale(1.06);
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
-  }
-
-  .project:hover .project-image img,
-  .project:focus-within .project-image img {
-    transform: scale(1);
-    filter: grayscale(0%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .project-image img { transition: filter 0.5s ease; }
-  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="masthead">
-    <div class="masthead-grid">
-      <div>
-        <div class="callsign">Sapporo, Japan</div>
-        <h1 class="name">Manuel Escarra Ghiglione</h1>
-        <p class="role">Aviation Ground Operations Specialist | Python Developer</p>
-        <div class="meta-row">
-          <a href="mailto:you@example.com">you@example.com</a>
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a><a href="https://upwork.com/freelancers/~yourid" target="_blank" rel="noopener">Upwork</a>
-        </div>
+<header class="masthead">
+  <div class="masthead-grid">
+    <div>
+      <div class="callsign">Sapporo, Japan</div>
+      <h1 class="name">Manuel Escarrá Ghiglione</h1>
+      <p class="role">Father, son, husband, friend
+Programmer Analyst
+Aviation Ground Operations Specialist</p>
+      <div class="meta-row">
+        <a href="resume.html" class="resume-jump">Jump to résumé →</a>
+        <a href="mailto:escarra.manuel@gmail.com">escarra.manuel@gmail.com</a>
+        <a href="https://github.com/Battosai21" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/manuel-escarr%C3%A1-ghiglione-50b406126/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
-      
-      <div class="photo-frame">
-        <img src="assets/images/profile.jpg" alt="Manuel Escarra Ghiglione">
-      </div>
-      
     </div>
-  </header>
+    
+    <div class="photo-frame"><img src="assets/images/profile.jpg" alt="Manuel Escarrá Ghiglione"></div>
+    
+  </div>
+</header>
 
-  <section id="about">
-    <div class="section-head reveal">
-      <span class="section-tag">01 — ABOUT</span>
-      <h2 class="section-title">Summary</h2>
-    </div>
-    <p class="summary-text">Ramp agent and aviation ground operations specialist with a background in software development and HR reporting. Trilingual (Spanish/English/Japanese). Combines hands-on, procedural aviation experience with practical programming skills for automation and tooling.</p>
-  </section>
+<nav class="timeline-nav">
+  <div class="timeline-track">
+    
+    <button data-target="year-2014">2014</button>
+    
+    <button data-target="year-2017">2017</button>
+    
+    <button data-target="year-2019">2019</button>
+    
+    <button data-target="year-2021">2021</button>
+    
+    <button data-target="year-2022">2022</button>
+    
+    <button data-target="year-2024">2024</button>
+    
+    <button data-target="year-2026">2026</button>
+    
+  </div>
+</nav>
 
-  
-  <section id="experience">
-    <div class="section-head reveal">
-      <span class="section-tag">02 — LOG</span>
-      <h2 class="section-title">Experience</h2>
-    </div>
-    
-    <div class="log reveal">
-      <div class="log-dates">2024-01 – 2026-01</div>
-      <div>
-        <p class="log-role">Ramp Agent</p>
-        <p class="log-org">FRS · New Chitose Airport, Japan</p>
-        <p class="log-summary">Ground operations including baggage handling, weight and balance, and ramp safety procedures.</p>
-        
-      </div>
-    </div>
-    
-    <div class="log reveal">
-      <div class="log-dates">—</div>
-      <div>
-        <p class="log-role">Ramp Agent</p>
-        <p class="log-org">Skymark Airlines · New Chitose Airport, Japan</p>
-        <p class="log-summary">Ramp and ground operations for domestic carrier.</p>
-        
-      </div>
-    </div>
-    
-    <div class="log reveal">
-      <div class="log-dates">—</div>
-      <div>
-        <p class="log-role">Software Developer</p>
-        <p class="log-org">Brain Knowledge Systems · Argentina</p>
-        <p class="log-summary">Development work using Python/Django, C, and Bash.</p>
-        
-      </div>
-    </div>
-    
-    <div class="log reveal">
-      <div class="log-dates">—</div>
-      <div>
-        <p class="log-role">HR Report Writer</p>
-        <p class="log-org">Accenture · Argentina</p>
-        <p class="log-summary">HR reporting and analysis using Workday.</p>
-        
-      </div>
-    </div>
-    
-  </section>
-  
 
-  
-  <section id="military">
-    <div class="section-head reveal">
-      <span class="section-tag">03 — SERVICE</span>
-      <h2 class="section-title">Military</h2>
-    </div>
-    
-    <div class="log reveal">
-      <div class="log-dates">Reserve</div>
-      <div>
-        <p class="log-role">Reservist</p>
-        <p class="log-org">Argentine Navy (Reserve)</p>
-        
-        <ul>
-          <li>Hazmat / Dangerous Goods Regulations (DGR) certification</li><li>Firefighting certification</li><li>Combat medic training</li>
-        </ul>
-        
-      </div>
-    </div>
-    
-  </section>
-  
+<section class="intro reveal wrap-narrow">
+  <p><strong>Welcome, dear stranger (or not) to my personal website!</strong> 
 
+This site is intended to share my journey through life and experiences, so that when future generations of my family look back on my life, they will have a clear picture of who I was and what I stood for. As the famous saying goes:
+
+<i>'We all die twice: the first time is when we simply cease to be; the second time is when we are forgotten'.</i>
+
+Since I find too difficult to remember every detail of my story in a normal conversation, I thought I might put everything in one place, so that people can easily find and read about me. I hope it's not too boring. There is a conveniently placed timeline above this text so you can jump between years if you don't want to read the whole thing. I would like to thank you from the bottom of my heart for visiting my site. I hope you find something interesting!
+
+If you would like to see a more professional version of my story, please check out my <a href="/resume">resume (CV)</a> instead.</p>
+</section>
+
+
+<main>
   
-  <section id="projects">
-    <div class="section-head reveal">
-      <span class="section-tag">04 — BUILD</span>
-      <h2 class="section-title">Projects</h2>
-    </div>
-    
-    <div class="project reveal">
-      <div class="project-label">1 of 1</div>
-      <div>
-        <p class="project-name"><a href="https://play.google.com/store/apps/details?id=your.app.id" target="_blank" rel="noopener">METAR/TAF Weather App</a></p>
-        <p class="project-desc">Android app for pilots and aviation enthusiasts to check METAR/TAF weather reports. Built with Kotlin, Jetpack Compose, Retrofit, and DataStore Preferences.</p>
-        
-        <div class="project-image">
-          <img src="assets/images/projects/metar-taf.jpg" alt="METAR/TAF Weather App" loading="lazy">
+  <section class="chapter reveal" id="year-2014" data-year="year-2014">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2014</div>
+          <h2 class="chapter-title">Joining the Argentine Navy Reserve</h2>
+          <p class="chapter-body">Started as a reservist in the Argentine Navy, training in hazmat/dangerous goods handling, firefighting, and combat medic skills — a foundation of procedure and discipline that still shows up in how I approach ramp safety today.</p>
         </div>
         
-        
-        <div class="keywords">
-          <span>Kotlin</span><span>Jetpack Compose</span><span>Android</span><span>Aviation</span>
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 1;"
+              aria-label="View photo 1 of 1 for 2014"
+              tabindex="-1"
+            >
+              <img src="assets/images/biography/2014.jpg" alt="Joining the Argentine Navy Reserve — photo 1" loading="lazy">
+            </button>
+            
+          </div>
         </div>
         
       </div>
     </div>
-    
   </section>
   
-
-  
-  <section id="skills">
-    <div class="section-head reveal">
-      <span class="section-tag">05 — TOOLS</span>
-      <h2 class="section-title">Skills</h2>
-    </div>
-    <div class="skills-grid reveal">
-      
-      <div>
-        <div class="skill-group-name">Aviation Ground Operations</div>
-        <div class="skill-group-items">Ramp/Baggage Handling, Weight & Balance, DGR/Hazmat, Ramp Safety</div>
+  <section class="chapter reveal" id="year-2017" data-year="year-2017">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2017</div>
+          <h2 class="chapter-title">Writing software for the first time professionally</h2>
+          <p class="chapter-body">Joined Brain Knowledge Systems in Argentina as a developer, working in Python, Django, and C. This is where the engineering side of things started — a thread that later became automation scripts, side projects, and eventually freelance work.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 1;"
+              aria-label="View photo 1 of 1 for 2017"
+              tabindex="-1"
+            >
+              <img src="assets/images/biography/2017.jpg" alt="Writing software for the first time professionally — photo 1" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
       </div>
-      
-      <div>
-        <div class="skill-group-name">Software Development</div>
-        <div class="skill-group-items">Python, Django, C, Kotlin, Bash</div>
-      </div>
-      
-      <div>
-        <div class="skill-group-name">Tools & Platforms</div>
-        <div class="skill-group-items">Workday, Retrofit, Jetpack Compose, Git, GitHub Actions</div>
-      </div>
-      
-    </div>
-  </section>
-  
-
-  
-  <section id="languages-certs">
-    <div class="section-head reveal">
-      <span class="section-tag">06 — REF</span>
-      <h2 class="section-title">Languages &amp; Certifications</h2>
-    </div>
-    <div class="two-col reveal">
-      
-      <ul class="list-plain">
-        
-        <li><span>Spanish</span><span class="fluency">Native</span></li>
-        
-        <li><span>English</span><span class="fluency">Fluent</span></li>
-        
-        <li><span>Japanese</span><span class="fluency">Fluent</span></li>
-        
-      </ul>
-      
-      
-      <ul class="list-plain">
-        
-        <li><span>Dangerous Goods Regulations (DGR) / Hazmat</span><span class="issuer">Argentine Navy</span></li>
-        
-        <li><span>Firefighting Certification</span><span class="issuer">Argentine Navy</span></li>
-        
-        <li><span>Combat Medic Training</span><span class="issuer">Argentine Navy</span></li>
-        
-      </ul>
-      
     </div>
   </section>
   
+  <section class="chapter reveal" id="year-2019" data-year="year-2019">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2019</div>
+          <h2 class="chapter-title">HR reporting at Accenture</h2>
+          <p class="chapter-body">Moved into HR report writing at Accenture Argentina, working with Workday. Less code, more data and process — but it sharpened how I think about structuring information clearly for other people to use.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 1;"
+              aria-label="View photo 1 of 1 for 2019"
+              tabindex="-1"
+            >
+              <img src="assets/images/biography/2019.jpg" alt="HR reporting at Accenture — photo 1" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="chapter reveal" id="year-2021" data-year="year-2021">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2021</div>
+          <h2 class="chapter-title">Moving to Japan</h2>
+          <p class="chapter-body">Relocated to Sapporo, Hokkaido. New language environment, new career direction — the start of the aviation ground operations chapter.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 1;"
+              aria-label="View photo 1 of 1 for 2021"
+              tabindex="-1"
+            >
+              <img src="assets/images/biography/2021.jpg" alt="Moving to Japan — photo 1" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="chapter reveal" id="year-2022" data-year="year-2022">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2022</div>
+          <h2 class="chapter-title">Ramp agent at Skymark Airlines</h2>
+          <p class="chapter-body">Began working ramp and ground operations at New Chitose Airport — baggage handling, aircraft turnaround, and the procedural rhythm of airside work.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 1;"
+              aria-label="View photo 1 of 1 for 2022"
+              tabindex="-1"
+            >
+              <img src="assets/images/biography/2022.jpg" alt="Ramp agent at Skymark Airlines — photo 1" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="chapter reveal" id="year-2024" data-year="year-2024">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2024</div>
+          <h2 class="chapter-title">Ramp agent at FRS</h2>
+          <p class="chapter-body">Continued in ground operations at FRS, taking on weight and balance responsibilities alongside ramp safety work.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 2;"
+              aria-label="View photo 1 of 2 for 2024"
+              
+            >
+              <img src="assets/images/biography/2024.jpg" alt="Ramp agent at FRS — photo 1" loading="lazy">
+            </button>
+            
+            <button
+              class="fan-photo"
+              style="--fan-rot: -6deg; --fan-x: -16px; --fan-z: 1;"
+              aria-label="View photo 2 of 2 for 2024"
+              
+            >
+              <img src="assets/images/biography/2024b.jpg" alt="Ramp agent at FRS — photo 2" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="chapter reveal" id="year-2026" data-year="year-2026">
+    <div class="wrap">
+      <div class="chapter-inner">
+        <div class="chapter-text">
+          <div class="chapter-year">2026</div>
+          <h2 class="chapter-title">Building things on the side</h2>
+          <p class="chapter-body">Shipped a METAR/TAF weather app for pilots, built with Kotlin and Jetpack Compose, and started taking on freelance Python and automation work — bringing the software side back into the picture alongside aviation.</p>
+        </div>
+        
+        <div class="chapter-media">
+          <div class="photo-fan">
+            
+            <button
+              class="fan-photo active"
+              style="--fan-rot: 6deg; --fan-x: 16px; --fan-z: 2;"
+              aria-label="View photo 1 of 2 for 2026"
+              
+            >
+              <img src="assets/images/biography/2026.jpg" alt="Building things on the side — photo 1" loading="lazy">
+            </button>
+            
+            <button
+              class="fan-photo"
+              style="--fan-rot: -6deg; --fan-x: -16px; --fan-z: 1;"
+              aria-label="View photo 2 of 2 for 2026"
+              
+            >
+              <img src="assets/images/biography/2026b.jpg" alt="Building things on the side — photo 2" loading="lazy">
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+</main>
 
-  <footer>
-    Built with data/resume.json · last generated at build time
-  </footer>
-</div>
+<footer>
+  Prefer the short version? <a href="resume.html">View my résumé →</a>
+</footer>
 
 <script>
 (function () {
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
+  var navEl = document.querySelector('.timeline-nav');
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+  var revealEls = document.querySelectorAll('.reveal');
+  var navButtons = document.querySelectorAll('.timeline-track button');
+  var track = document.querySelector('.timeline-track');
 
+  function setNavHeight() {
+    if (navEl) document.documentElement.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
+  }
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight);
+
+  // Active year highlight
+  function setActiveNav(id) {
+    navButtons.forEach(function (btn) {
+      var isActive = btn.dataset.target === id;
+      btn.classList.toggle('active', isActive);
+      if (isActive && track) {
+        var btnRect = btn.getBoundingClientRect();
+        var trackRect = track.getBoundingClientRect();
+        track.scrollLeft += (btnRect.left - trackRect.left) - trackRect.width / 2 + btnRect.width / 2;
+      }
+    });
+  }
+
+  // Click-to-jump on timeline
+  var isProgrammaticScroll = false;
+
+  function waitForScrollSettle(cb) {
+    var lastY = window.scrollY;
+    var stableFrames = 0;
+    function check() {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 1) {
+        stableFrames++;
+      } else {
+        stableFrames = 0;
+      }
+      lastY = y;
+      if (stableFrames > 6) { cb(); return; }
+      requestAnimationFrame(check);
+    }
+    requestAnimationFrame(check);
+  }
+
+  navButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      isProgrammaticScroll = true;
+      setActiveNav(btn.dataset.target);
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      waitForScrollSettle(function () { isProgrammaticScroll = false; });
+    });
+  });
+
+  // Fan photo picker
+  document.querySelectorAll('.photo-fan').forEach(function (fan) {
+    var photos = fan.querySelectorAll('.fan-photo');
+    if (photos.length <= 1) return;
+    photos.forEach(function (photo) {
+      photo.addEventListener('click', function () {
+        photos.forEach(function (p) { p.classList.remove('active'); p.tabIndex = 0; });
+        photo.classList.add('active');
+      });
+    });
+  });
+
+  // Active-year tracking: checks actual chapter positions on every scroll
+  // frame instead of relying on intersection-threshold events, so a fast
+  // scroll can never skip over a chapter without it being detected.
+  var scrollTicking = false;
+
+  function updateActiveFromScroll() {
+    if (isProgrammaticScroll || !chapters.length) return;
+    var navH = navEl ? navEl.offsetHeight : 0;
+    var refY = navH + 4;
+    var current = chapters[0];
+    for (var i = 0; i < chapters.length; i++) {
+      if (chapters[i].getBoundingClientRect().top <= refY) {
+        current = chapters[i];
+      } else {
+        break;
+      }
+    }
+    setActiveNav(current.dataset.year);
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(function () {
+        updateActiveFromScroll();
+        scrollTicking = false;
+      });
+    }
+  }, { passive: true });
+
+  updateActiveFromScroll();
+
+  // Fade-in reveal
   if (reduceMotion || !('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('is-visible'); });
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
     return;
   }
 
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry, i) {
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        var el = entry.target;
-        var delay = Math.min(i * 40, 160);
-        setTimeout(function () { el.classList.add('is-visible'); }, delay);
-        observer.unobserve(el);
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  items.forEach(function (el) { observer.observe(el); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
 })();
 </script>
 

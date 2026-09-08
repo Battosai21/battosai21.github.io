@@ -69,7 +69,7 @@
     letter-spacing: -0.01em;
   }
 
-  .role { font-size: 1.02rem; color: var(--text-muted); max-width: 46ch; }
+  .role { font-size: 1.02rem; color: var(--text-muted); max-width: 46ch; white-space: pre-line; }
 
   .meta-row {
     display: flex;
@@ -125,8 +125,21 @@
   .timeline-track button.active { color: var(--amber); border-bottom-color: var(--amber); }
 
   /* Intro */
-  .intro { padding: 40px 0 8px; scroll-snap-align: none; }
-  .intro p { font-size: 1.08rem; color: var(--text-muted); max-width: 58ch; }
+  .intro {
+    padding: 40px 20px 44px;
+    margin-bottom: 8px;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+    scroll-snap-align: none;
+  }
+  .intro p {
+    font-size: 1.08rem;
+    color: var(--text-muted);
+    max-width: 58ch;
+    text-align: justify;
+    text-justify: inter-word;
+    white-space: pre-line;
+  }
 
   /* Chapters — one per screen, alternating sides */
   .chapter {

@@ -1,20 +1,19 @@
 {
   "basics": {
-    "name": "Manuel Escarra Ghiglione",
-    "label": "Aviation Ground Operations Specialist | Python Developer",
+    "name": "Manuel Escarrá Ghiglione",
+    "label": "Father, son, husband, friend\nProgrammer Analyst\nAviation Ground Operations Specialist",
     "image": "assets/images/profile.jpg",
-    "email": "you@example.com",
+    "email": "escarra.manuel@gmail.com",
     "location": {
       "city": "Sapporo",
       "region": "Hokkaido",
       "country": "Japan"
     },
     "profiles": [
-      { "network": "GitHub", "username": "yourusername", "url": "https://github.com/yourusername" },
-      { "network": "LinkedIn", "username": "yourusername", "url": "https://linkedin.com/in/yourusername" },
-      { "network": "Upwork", "username": "yourusername", "url": "https://upwork.com/freelancers/~yourid" }
+      { "network": "GitHub", "username": "Battosai21", "url": "https://github.com/Battosai21" },
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/manuel-escarr%C3%A1-ghiglione-50b406126/" }
     ],
-    "summary": "Ramp agent and aviation ground operations specialist with a background in software development and HR reporting. Trilingual (Spanish/English/Japanese). Combines hands-on, procedural aviation experience with practical programming skills for automation and tooling."
+    "summary": "Systems analyst/developer with a background in aviation ground operations. Trilingual (Spanish/English/Japanese). Combines hands-on, procedural aviation experience with practical programming skills for automation and tooling."
   },
   "work": [
     {

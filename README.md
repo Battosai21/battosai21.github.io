@@ -40,8 +40,21 @@ rebuilds both pages and republishes them automatically.
 
 ```bash
 pip install -r requirements.txt
+python dev.py
+```
+
+Then open `http://localhost:8000`. This watches `data/`, `templates/`,
+and `assets/` for changes and rebuilds automatically — just refresh
+your browser after saving an edit. No need to push to GitHub to see
+changes. Pass a different port with `python dev.py 8080` if 8000 is
+taken.
+
+For a one-off build without the watcher:
+
+```bash
 python build.py
-# open output/index.html in a browser
+# open output/index.html directly, or serve it:
+cd output && python -m http.server 8000
 ```
 
 ## Updating your info
