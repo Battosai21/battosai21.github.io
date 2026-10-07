@@ -2,19 +2,20 @@
   "intro": "<strong>Welcome, dear stranger (or not) to my personal website!</strong> \n\nThis site is intended to share my journey through life and experiences, so that when future generations of my family look back on my life, they will have a clear picture of who I was and what I stood for. As the famous saying goes:\n\n<i>'We all die twice: the first time is when we simply cease to be; the second time is when we are forgotten'.</i>\n\nSince I find too difficult to remember every detail of my story in a normal conversation, I thought I might put everything in one place, so that people can easily find and read about me. I hope it's not too boring. There is a conveniently placed timeline above this text so you can jump between years if you don't want to read the whole thing. I would like to thank you from the bottom of my heart for visiting my site. I hope you find something interesting!\n\nIf you would like to see a more professional version of my story, please check out my <a href=\"/resume\">resume (CV)</a> instead.",
   "chapters": [
     {
-      "year": "2014",
-      "title": "Joining the Argentine Navy Reserve",
-      "text": "Started as a reservist in the Argentine Navy, training in hazmat/dangerous goods handling, firefighting, and combat medic skills \u2014 a foundation of procedure and discipline that still shows up in how I approach ramp safety today.",
+      "year": "1994",
+      "title": "The year I was born",
+      "text": "My mother gave birth to me at 2:00 AM on the night of June, 30th, 1994 at the Women's Hospital in Rosario, Argentina.\n\n According to accounts from my siblings, it was a very cold winter day in Arroyo Seco, Santa Fe when my grandmother Elvira went to pick them up at school. She went through the door of San Jose elementary school screaming that I was born. My mother always tells that I had a very pale skin and a very dark hair, and was pretty large, weighing 3.8 kg.\n\nI was baptized following the Roman Catholic tradition in the Church of the Assumption in Arroyo Seco, Santa Fe - city where I would live all my life up until 29 years old. My godparents were Juan Carlos Roggi and Rita Isnardi, who at the time were my mother's coworkers at the city hall.",
       "images": [
         "assets/images/biography/2014.jpg"
       ]
     },
     {
-      "year": "2017",
-      "title": "Writing software for the first time professionally",
-      "text": "Joined Brain Knowledge Systems in Argentina as a developer, working in Python, Django, and C. This is where the engineering side of things started \u2014 a thread that later became automation scripts, side projects, and eventually freelance work.",
+      "year": "1995-2006",
+      "title": "My childhood",
+      "text": "I remember my childhood as a very happy time. The oldest memory that I can think of is of my mother walking me around the 9 de Julio park in a baby stroller. My mother talked to me but I didn't knew how to answer.\n\nMy second oldest memory is about me being in the kindergarten at San Jose school, and I saw a toy truck on top of a drawer. I wanted to play with it, but I couldn't reach it. So I spent a considerable amount of time doing gestures to the teacher to ask her to give me the toy. I remember thinking clearly in my mind 'What is the name of that toy?' and I was very frustrated that I couldn't say it. Then, the teacher realized what I was pointing so vehemently and she told me 'Oh, you want the truck!'. I replied 'Yes! Truck!' and I was very happy that I could finally say the name of the toy. But then the teacher gave me some excuse like 'Oh sorry, that is for the older kids, you can't play with it yet'. In the moment I was frustrated, but quickly went to do something else. Still, when my birthday came, the teacher handed the truck to me to play for the day, that is also the first birthday I remember. The first photo is from that moment.\n\nI have a lot of memories from my childhood ever since. I will keep on writing them down here at later dates.",
       "images": [
-        "assets/images/biography/2017.jpg"
+        "assets/images/biography/1995-2006.jpg",
+        "assets/images/biography/1995-2006(2).jpg"
       ]
     },
     {

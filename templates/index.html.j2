@@ -21,6 +21,10 @@
     --nav-h: 52px;
   }
 
+  @media (min-width: 1200px) {
+    :root { --max-width: 1300px; }
+  }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 
@@ -150,6 +154,7 @@
     scroll-snap-align: start;
     scroll-margin-top: var(--nav-h);
     padding: 48px 0;
+    white-space: pre-line;
   }
   .chapter:last-of-type { border-bottom: none; }
 
@@ -158,6 +163,8 @@
     display: flex;
     align-items: center;
     gap: 56px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   /* Alternate sides on even chapters */
@@ -181,7 +188,7 @@
     margin: 0 0 14px;
   }
 
-  .chapter-body { color: var(--text-muted); font-size: 1.02rem; max-width: 50ch; }
+  .chapter-body { color: var(--text-muted); font-size: 1.02rem; }
 
   /* Photo fan */
   .photo-fan {
@@ -194,22 +201,22 @@
   }
 
   .fan-photo {
-    position: absolute;
-    width: 72%;
-    aspect-ratio: 16 / 10;
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    padding: 0;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease, box-shadow 0.4s ease;
-    transform: rotate(var(--fan-rot, 0deg)) translateX(var(--fan-x, 0px));
-    z-index: var(--fan-z, 1);
-  }
+  position: absolute;
+  max-width: 70%;
+  max-height: 85%;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  line-height: 0;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease, box-shadow 0.4s ease;
+  transform: rotate(var(--fan-rot, 0deg)) translateX(var(--fan-x, 0px));
+  z-index: var(--fan-z, 1);
+}
 
-  .fan-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(55%); transition: filter 0.4s ease; }
-
+  .fan-photo img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; filter: grayscale(55%); transition: filter 0.4s ease; }
   .fan-photo:hover { filter: none; }
   .fan-photo:hover img { filter: grayscale(20%); }
 
@@ -222,6 +229,75 @@
   .fan-photo.active img { filter: none; }
 
   .fan-photo:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    transform-origin: center center;
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 10;
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--text);
+    font-size: 28px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .lightbox-close:hover { border-color: var(--amber); color: var(--amber); }
+
+  .lightbox-controls {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+  }
+  .lightbox-controls button {
+    background: rgba(23, 31, 40, 0.9);
+    border: 1px solid var(--rule);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .lightbox-controls button:hover { border-color: var(--amber); color: var(--amber); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox, .lightbox img { transition: none; }
+  }
 
   /* Scroll reveal */
   .reveal {
@@ -333,6 +409,15 @@
 <footer>
   Prefer the short version? <a href="resume.html">View my résumé →</a>
 </footer>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <div class="lightbox-controls">
+    <button class="lightbox-zoom-out" aria-label="Zoom out">−</button>
+    <button class="lightbox-zoom-in" aria-label="Zoom in">+</button>
+  </div>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <script>
 (function () {
@@ -453,6 +538,164 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   revealEls.forEach(function (el) { revealObserver.observe(el); });
 })();
+
+// Lightbox
+(function () {
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var closeBtn = document.querySelector('.lightbox-close');
+  var zoomInBtn = document.querySelector('.lightbox-zoom-in');
+  var zoomOutBtn = document.querySelector('.lightbox-zoom-out');
+
+  var scale = 1, panX = 0, panY = 0;
+  var MIN_SCALE = 1, MAX_SCALE = 4;
+
+  // Track which photo-set is open, so arrow keys know what "next" means
+  var currentPhotos = [];
+  var currentIndex = 0;
+
+  function applyTransform() {
+    lightboxImg.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
+    lightboxImg.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+  }
+
+  function resetZoom() {
+    scale = 1; panX = 0; panY = 0;
+    applyTransform();
+  }
+
+  function clampScale(s) {
+    return Math.min(MAX_SCALE, Math.max(MIN_SCALE, s));
+  }
+
+  function showIndex(i) {
+    currentIndex = (i + currentPhotos.length) % currentPhotos.length;
+    var photo = currentPhotos[currentIndex];
+    var img = photo.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    resetZoom();
+    // keep the fan in sync, so closing the lightbox leaves the same photo in front
+    currentPhotos.forEach(function (p) { p.classList.remove('active'); p.tabIndex = 0; });
+    photo.classList.add('active');
+  }
+
+  function openLightbox(photos, index) {
+    currentPhotos = photos;
+    showIndex(index);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    resetZoom();
+  }
+
+  // Wire up fan photos: click the FRONT (active) photo opens the lightbox;
+  // clicking any other photo just brings it to the front, same as before.
+  document.querySelectorAll('.photo-fan').forEach(function (fan) {
+    var photos = Array.prototype.slice.call(fan.querySelectorAll('.fan-photo'));
+    photos.forEach(function (photo, idx) {
+      photo.addEventListener('click', function () {
+        var isFront = photo.classList.contains('active');
+        if (isFront || photos.length === 1) {
+          openLightbox(photos, idx);
+          return;
+        }
+        photos.forEach(function (p) { p.classList.remove('active'); p.tabIndex = 0; });
+        photo.classList.add('active');
+      });
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight' && currentPhotos.length > 1) showIndex(currentIndex + 1);
+    if (e.key === 'ArrowLeft' && currentPhotos.length > 1) showIndex(currentIndex - 1);
+  });
+
+  zoomInBtn.addEventListener('click', function () { scale = clampScale(scale + 0.5); applyTransform(); });
+  zoomOutBtn.addEventListener('click', function () { scale = clampScale(scale - 0.5); applyTransform(); });
+
+  // Wheel to zoom
+  lightboxImg.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    scale = clampScale(scale + (e.deltaY < 0 ? 0.25 : -0.25));
+    if (scale === 1) { panX = 0; panY = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  // Double-click / double-tap to toggle zoom
+  lightboxImg.addEventListener('dblclick', function () {
+    if (scale > 1) { resetZoom(); } else { scale = 2.5; applyTransform(); }
+  });
+
+  // Prevent the browser's native "drag this image out" behavior, which was
+  // hijacking the pointer gesture and making drag feel like a text/image
+  // selection instead of a pan.
+  lightboxImg.setAttribute('draggable', 'false');
+  lightboxImg.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+  // Drag to pan when zoomed
+  var dragging = false, startX, startY, startPanX, startPanY;
+  lightboxImg.addEventListener('pointerdown', function (e) {
+    if (scale <= 1) return;
+    dragging = true;
+    startX = e.clientX; startY = e.clientY;
+    startPanX = panX; startPanY = panY;
+    lightboxImg.setPointerCapture(e.pointerId);
+    lightboxImg.style.cursor = 'grabbing';
+  });
+  lightboxImg.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    panX = startPanX + (e.clientX - startX);
+    panY = startPanY + (e.clientY - startY);
+    applyTransform();
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (evt) {
+    lightboxImg.addEventListener(evt, function () {
+      dragging = false;
+      if (scale > 1) lightboxImg.style.cursor = 'grab';
+    });
+  });
+
+  // Pinch-to-zoom on touch
+  var pinchStartDist = null, pinchStartScale = 1;
+  lightboxImg.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 2) {
+      pinchStartDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchStartScale = scale;
+    }
+  }, { passive: true });
+  lightboxImg.addEventListener('touchmove', function (e) {
+    if (e.touches.length === 2 && pinchStartDist) {
+      e.preventDefault();
+      var dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      scale = clampScale(pinchStartScale * (dist / pinchStartDist));
+      applyTransform();
+    }
+  }, { passive: false });
+  lightboxImg.addEventListener('touchend', function (e) {
+    if (e.touches.length < 2) pinchStartDist = null;
+  });
+})();
+
 </script>
 
 </body>
